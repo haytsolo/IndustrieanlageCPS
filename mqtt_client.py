@@ -10,7 +10,7 @@ def set_value(pin, value):
 
 
 def on_connect(mosq, obj, rc):
-	mosq.subscribe(topic, 0)
+	mosq.subscribe(topic, qos)
 	print("rc: "+str(rc))
 
 def on_message(mosq, obj, msg):
@@ -21,8 +21,12 @@ def on_message(mosq, obj, msg):
 	if payload.startswith("MS_CONV_1"):
 		payload_list = payload.split()	
 		pin = str(payload_list[0])
-		value = int(payload_list[1])
-		set_value(pin, value)
+		if len(payload_list) >= 2:		
+			value = int(payload_list[1])
+			set_value(pin, value)
+		else:
+			print("Too few arguments given")
+			
 
 
 
@@ -45,11 +49,12 @@ host = data["host"]
 port = data["port"]
 name = data["name"]
 topic = data["topic"]
+qos = data["qos"]
 #finished reading config
 
 #setting up client and connecting to host
 mqttc = mosquitto.Mosquitto(name)
-mqttc = mosquitto.Mosquitto()
+#mqttc = mosquitto.Mosquitto()
 mqttc.on_message = on_message
 mqttc.on_connect = on_connect
 mqttc.on_publish = on_publish
