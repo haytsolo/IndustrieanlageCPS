@@ -7,33 +7,40 @@ import mosquitto
 
 #setting up modules
 #setting up output modules
-#rail_out = gnublin.gnublin_module_pca9555()
-#rail_out.setAdress(#inster adress here)
-#rail_out.PinMode("8","out")
-#rail_out.PinMode("9","out")
-#rail_out.PinMode("10","out")
-#rail_out.PinMode("11","out")
-#rail_out.PinMode("12","out")
-#rail_out.PinMode("13","out")
-#rail_out.PinMode("14","out")
-#rail_out.PinMode("15","out")
-
+#try:
+	#rail_out = gnublin.gnublin_module_pca9555()
+	#rail_out.setAdress(#inster adress here)
+	#rail_out.PinMode("8","out")
+	#rail_out.PinMode("9","out")
+	#rail_out.PinMode("10","out")
+	#rail_out.PinMode("11","out")
+	#rail_out.PinMode("12","out")
+	#rail_out.PinMode("13","out")
+	#rail_out.PinMode("14","out")
+	#rail_out.PinMode("15","out")
+#except:
+#	print("No Relay Module found")
 #setting up input modules
 #module 1
-#rail_in_1 = gnublin.gnublin_module_pca9555()
-#rain_in_1.setAdress(#insert Adress here)
-#rail_in_1.PinMode("8","in")
-#rail_in_1.PinMode("9","in")
-#rail_in_1.PinMode("10","in")
-#rail_in_1.PinMode("11","in")
+#try:
+	#rail_in_1 = gnublin.gnublin_module_pca9555()
+	#rain_in_1.setAdress(#insert Adress here)
+	#rail_in_1.PinMode("8","in")
+	#rail_in_1.PinMode("9","in")
+	#rail_in_1.PinMode("10","in")
+	#rail_in_1.PinMode("11","in")
+#except:
+#	print("Rail_In_2 not found")
 #module 2
-#rail_in_2 = gnublin.gnublin_module_pca9555()
-#rain_in_2.setAdress(#insert Adress here)
-#rail_in_2.PinMode("8","in")
-#rail_in_2.PinMode("9","in")
-#rail_in_2.PinMode("10","in")
-#rail_in_2.PinMode("11","in")
-
+#try:
+	#rail_in_2 = gnublin.gnublin_module_pca9555()
+	#rain_in_2.setAdress(#insert Adress here)
+	#rail_in_2.PinMode("8","in")
+	#rail_in_2.PinMode("9","in")
+	#rail_in_2.PinMode("10","in")
+	#rail_in_2.PinMode("11","in")
+#except:
+#	print("Rail_In_2 not found")	
 
 
 # function for setting output values
