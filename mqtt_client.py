@@ -20,7 +20,7 @@ import mosquitto
 	#rail_out.PinMode("15","out")
 #except:
 #	print("No Relay Module found")
-#	exit
+#	exit()
 
 #setting up input modules
 #module 1
