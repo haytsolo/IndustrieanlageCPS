@@ -1,13 +1,50 @@
 #!/usr/bin/python
 
-
+import gnublin
 import json
 import mosquitto
+
+
+#setting up modules
+#setting up output modules
+rail_out = gnublin.gnublin_module_pca9555()
+rail_out.setAdress(#inster adress here)
+rail_out.PinMode("8","out")
+rail_out.PinMode("9","out")
+rail_out.PinMode("10","out")
+rail_out.PinMode("11","out")
+rail_out.PinMode("12","out")
+rail_out.PinMode("13","out")
+rail_out.PinMode("14","out")
+rail_out.PinMode("15","out")
+
+#setting up input modules
+#module 1
+rail_in_1 = gnublin.gnublin_module_pca9555()
+rain_in_1.setAdress(#insert Adress here)
+rail_in_1.PinMode("8","in")
+rail_in_1.PinMode("9","in")
+rail_in_1.PinMode("10","in")
+rail_in_1.PinMode("11","in")
+#module 2
+rail_in_2 = gnublin.gnublin_module_pca9555()
+rain_in_2.setAdress(#insert Adress here)
+rail_in_2.PinMode("8","in")
+rail_in_2.PinMode("9","in")
+rail_in_2.PinMode("10","in")
+rail_in_2.PinMode("11","in")
+
+
+
 # function for setting output values
 def set_value(pin, value):
 	print(pin, value)
 	
 
+
+#function for getting sensor values
+def get_value:
+	
 
 def on_connect(mosq, obj, rc):
 	mosq.subscribe(topic, qos)
