@@ -20,6 +20,8 @@ import mosquitto
 	#rail_out.PinMode("15","out")
 #except:
 #	print("No Relay Module found")
+#	exit
+
 #setting up input modules
 #module 1
 #try:
@@ -31,6 +33,7 @@ import mosquitto
 	#rail_in_1.PinMode("11","in")
 #except:
 #	print("Rail_In_2 not found")
+#	exit()
 #module 2
 #try:
 	#rail_in_2 = gnublin.gnublin_module_pca9555()
@@ -41,7 +44,7 @@ import mosquitto
 	#rail_in_2.PinMode("11","in")
 #except:
 #	print("Rail_In_2 not found")	
-
+#	exit()
 
 # function for setting output values
 def set_value(pin, value):
