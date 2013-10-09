@@ -26,11 +26,11 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-
+import json
 import mosquitto
 
 def on_connect(mosq, obj, rc):
-    mosq.subscribe("$SYS/#", 0)
+    mosq.subscribe(topic, 0)
     print("rc: "+str(rc))
 
 def on_message(mosq, obj, msg):
@@ -46,9 +46,21 @@ def on_log(mosq, obj, level, string):
     print(string)
 
 # If you want to use a specific client id, use
-# mqttc = mosquitto.Mosquitto("client-id")
+
 # but note that the client id must be unique on the broker. Leaving the client
 # id parameter empty will generate a random id for you.
+
+
+#read config and set values
+json_data = open("config.js","r")
+data = json.load(json_data)
+json_data.close()
+host = data["host"]
+port = data["port"]
+name = data["name"]
+topic = data["topic"]
+#finished reading config
+mqttc = mosquitto.Mosquitto(name)
 mqttc = mosquitto.Mosquitto()
 mqttc.on_message = on_message
 mqttc.on_connect = on_connect
@@ -56,7 +68,7 @@ mqttc.on_publish = on_publish
 mqttc.on_subscribe = on_subscribe
 # Uncomment to enable debug messages
 #mqttc.on_log = on_log
-mqttc.connect("test.mosquitto.org", 1883, 60)
+mqttc.connect(host, port, 60)
 
 
 mqttc.loop_forever()
