@@ -1,38 +1,38 @@
 #!/usr/bin/python
 
-import gnublin
+#import gnublin
 import json
 import mosquitto
 
 
 #setting up modules
 #setting up output modules
-rail_out = gnublin.gnublin_module_pca9555()
-rail_out.setAdress(#inster adress here)
-rail_out.PinMode("8","out")
-rail_out.PinMode("9","out")
-rail_out.PinMode("10","out")
-rail_out.PinMode("11","out")
-rail_out.PinMode("12","out")
-rail_out.PinMode("13","out")
-rail_out.PinMode("14","out")
-rail_out.PinMode("15","out")
+#rail_out = gnublin.gnublin_module_pca9555()
+#rail_out.setAdress(#inster adress here)
+#rail_out.PinMode("8","out")
+#rail_out.PinMode("9","out")
+#rail_out.PinMode("10","out")
+#rail_out.PinMode("11","out")
+#rail_out.PinMode("12","out")
+#rail_out.PinMode("13","out")
+#rail_out.PinMode("14","out")
+#rail_out.PinMode("15","out")
 
 #setting up input modules
 #module 1
-rail_in_1 = gnublin.gnublin_module_pca9555()
-rain_in_1.setAdress(#insert Adress here)
-rail_in_1.PinMode("8","in")
-rail_in_1.PinMode("9","in")
-rail_in_1.PinMode("10","in")
-rail_in_1.PinMode("11","in")
+#rail_in_1 = gnublin.gnublin_module_pca9555()
+#rain_in_1.setAdress(#insert Adress here)
+#rail_in_1.PinMode("8","in")
+#rail_in_1.PinMode("9","in")
+#rail_in_1.PinMode("10","in")
+#rail_in_1.PinMode("11","in")
 #module 2
-rail_in_2 = gnublin.gnublin_module_pca9555()
-rain_in_2.setAdress(#insert Adress here)
-rail_in_2.PinMode("8","in")
-rail_in_2.PinMode("9","in")
-rail_in_2.PinMode("10","in")
-rail_in_2.PinMode("11","in")
+#rail_in_2 = gnublin.gnublin_module_pca9555()
+#rain_in_2.setAdress(#insert Adress here)
+#rail_in_2.PinMode("8","in")
+#rail_in_2.PinMode("9","in")
+#rail_in_2.PinMode("10","in")
+#rail_in_2.PinMode("11","in")
 
 
 
@@ -43,7 +43,7 @@ def set_value(pin, value):
 
 
 #function for getting sensor values
-def get_value:
+#def get_value:
 	
 
 def on_connect(mosq, obj, rc):
@@ -79,14 +79,24 @@ def on_log(mosq, obj, level, string):
 
 
 #read config and set values
-json_data = open("config.js","r")
-data = json.load(json_data)
-json_data.close()
-host = data["host"]
-port = data["port"]
-name = data["name"]
-topic = data["topic"]
-qos = data["qos"]
+try:
+	json_data = open("config.js","r")
+except:
+	print("no config file found \nLoading standart config: \n")
+	print(" host = localhost \n port = 1883 \n name = gnublin \n topic = /sys \n qos = 1\n")
+	host = "127.0.0.1"
+	port = 1883
+	name = "gnublin"
+	topic = "/sys"
+	qos = 1
+else:
+	data = json.load(json_data)
+	host = data["host"]
+	port = data["port"]
+	name = data["name"]
+	topic = data["topic"]
+	qos = data["qos"]
+	json_data.close()
 #finished reading config
 
 #setting up client and connecting to host
@@ -98,7 +108,9 @@ mqttc.on_publish = on_publish
 mqttc.on_subscribe = on_subscribe
 # Uncomment to enable debug messages
 #mqttc.on_log = on_log
-mqttc.connect(host, port, 60)
-
-
+try:	
+	mqttc.connect(host, port, 60)
+except:
+	print("no broker found")
+	exit()
 mqttc.loop_forever()
