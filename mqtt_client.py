@@ -8,8 +8,16 @@ import mosquitto
 #setting up modules
 #setting up output modules
 #try:
+#	drill = gnublin.gnublin_gpio()
+#	drill.PinMode(14,"out")
+#except:
+#	print("Relay not found")
+#	exit()
+
+
+#try:
 	#rail_out = gnublin.gnublin_module_pca9555()
-	#rail_out.setAdress(#inster adress here)
+	#rail_out.setAdress(0x22)
 	#rail_out.PinMode("8","out")
 	#rail_out.PinMode("9","out")
 	#rail_out.PinMode("10","out")
@@ -26,18 +34,18 @@ import mosquitto
 #module 1
 #try:
 	#rail_in_1 = gnublin.gnublin_module_pca9555()
-	#rain_in_1.setAdress(#insert Adress here)
+	#rain_in_1.setAdress(0x20)
 	#rail_in_1.PinMode("8","in")
 	#rail_in_1.PinMode("9","in")
 	#rail_in_1.PinMode("10","in")
 	#rail_in_1.PinMode("11","in")
 #except:
-#	print("Rail_In_2 not found")
+#	print("Rail_In_1 not found")
 #	exit()
 #module 2
 #try:
 	#rail_in_2 = gnublin.gnublin_module_pca9555()
-	#rain_in_2.setAdress(#insert Adress here)
+	#rain_in_2.setAdress(0x21)
 	#rail_in_2.PinMode("8","in")
 	#rail_in_2.PinMode("9","in")
 	#rail_in_2.PinMode("10","in")
@@ -46,9 +54,37 @@ import mosquitto
 #	print("Rail_In_2 not found")	
 #	exit()
 
+
+#setting up dictonary for Signalname -> pin Conversion
+
+pin_list = {
+	"OX3_M_CONV1_NEG" : 8, 
+	"OX3_M_CONV2_NEG" : 9,
+	"OX3_M_CONV3_NEG" : 10, 
+	"OX3_M_CONV1_POS" : 11, 
+	"OX3_M_CONV2_POS" : 12, 
+	"OX3_M_CONV3_POS" : 13,
+	"OX3_M_TOOL_UP" : 14,
+	"OX3_M_TOOL_DOWN" : 15  }
+
+
+
+
 # function for setting output values
 def set_value(pin, value):
-	print(pin, value)
+	print(pin)
+	if pin != "OX3_M_DRILL_ON":
+		pin_set = pin_list[pin]			
+		#rail_out.digitalWrite(pin_set, value)
+		print(pin_set, value)
+	elif pin == "OX3_M_DRILL_ON":
+		#drill.digitalWrite(14,value)
+		print(pin,value)
+	else:
+		print("No Valid Pin found")
+		
+
+	#print(pin, value)
 	
 
 
@@ -65,7 +101,7 @@ def on_message(mosq, obj, msg):
 #saving payload and searching for keywords
 	payload = str(msg.payload)
 	print payload
-	if payload.startswith("MS_CONV_1"):
+	if payload.startswith("OX3"):
 		payload_list = payload.split()	
 		pin = str(payload_list[0])
 		if len(payload_list) >= 2:		
