@@ -13,7 +13,8 @@ try:
 except:
 	print("Relay not found")
 	exit()
-
+else:
+	print("Drill Initialized")
 
 try:
 	rail_out = gnublin.gnublin_module_pca9555()
@@ -27,10 +28,12 @@ try:
 	rail_out.PinMode("14","out")
 	rail_out.PinMode("15","out")
 except:
-	print("No Relay Module found")
+	print("No output Module found")
 	exit()
+else:
+	print("Output Module Initialized")
 
-setting up input modules
+#setting up input modules
 module 1
 try:
 	rail_in_1 = gnublin.gnublin_module_pca9555()
@@ -42,7 +45,10 @@ try:
 except:
 	print("Rail_In_1 not found")
 	exit()
-module 2
+else:
+	print("Input Module 1 Initialized")
+
+#module 2
 try:
 	rail_in_2 = gnublin.gnublin_module_pca9555()
 	rain_in_2.setAdress(0x21)
@@ -53,7 +59,8 @@ try:
 except:
 	print("Rail_In_2 not found")	
 	exit()
-
+else:
+	print("Input Module 2 Initialized")
 
 #setting up dictonary for Signalname -> pin Conversion
 
