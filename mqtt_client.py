@@ -1,58 +1,58 @@
 #!/usr/bin/python
 
-#import gnublin
+import gnublin
 import json
 import mosquitto
 
 
 #setting up modules
 #setting up output modules
-#try:
-#	drill = gnublin.gnublin_gpio()
-#	drill.PinMode(14,"out")
-#except:
-#	print("Relay not found")
-#	exit()
+try:
+	drill = gnublin.gnublin_gpio()
+	drill.PinMode(14,"out")
+except:
+	print("Relay not found")
+	exit()
 
 
-#try:
-	#rail_out = gnublin.gnublin_module_pca9555()
-	#rail_out.setAdress(0x22)
-	#rail_out.PinMode("8","out")
-	#rail_out.PinMode("9","out")
-	#rail_out.PinMode("10","out")
-	#rail_out.PinMode("11","out")
-	#rail_out.PinMode("12","out")
-	#rail_out.PinMode("13","out")
-	#rail_out.PinMode("14","out")
-	#rail_out.PinMode("15","out")
-#except:
-#	print("No Relay Module found")
-#	exit()
+try:
+	rail_out = gnublin.gnublin_module_pca9555()
+	rail_out.setAdress(0x22)
+	rail_out.PinMode("8","out")
+	rail_out.PinMode("9","out")
+	rail_out.PinMode("10","out")
+	rail_out.PinMode("11","out")
+	rail_out.PinMode("12","out")
+	rail_out.PinMode("13","out")
+	rail_out.PinMode("14","out")
+	rail_out.PinMode("15","out")
+except:
+	print("No Relay Module found")
+	exit()
 
-#setting up input modules
-#module 1
-#try:
-	#rail_in_1 = gnublin.gnublin_module_pca9555()
-	#rain_in_1.setAdress(0x20)
-	#rail_in_1.PinMode("8","in")
-	#rail_in_1.PinMode("9","in")
-	#rail_in_1.PinMode("10","in")
-	#rail_in_1.PinMode("11","in")
-#except:
-#	print("Rail_In_1 not found")
-#	exit()
-#module 2
-#try:
-	#rail_in_2 = gnublin.gnublin_module_pca9555()
-	#rain_in_2.setAdress(0x21)
-	#rail_in_2.PinMode("8","in")
-	#rail_in_2.PinMode("9","in")
-	#rail_in_2.PinMode("10","in")
-	#rail_in_2.PinMode("11","in")
-#except:
-#	print("Rail_In_2 not found")	
-#	exit()
+setting up input modules
+module 1
+try:
+	rail_in_1 = gnublin.gnublin_module_pca9555()
+	rain_in_1.setAdress(0x20)
+	rail_in_1.PinMode("8","in")
+	rail_in_1.PinMode("9","in")
+	rail_in_1.PinMode("10","in")
+	rail_in_1.PinMode("11","in")
+except:
+	print("Rail_In_1 not found")
+	exit()
+module 2
+try:
+	rail_in_2 = gnublin.gnublin_module_pca9555()
+	rain_in_2.setAdress(0x21)
+	rail_in_2.PinMode("8","in")
+	rail_in_2.PinMode("9","in")
+	rail_in_2.PinMode("10","in")
+	rail_in_2.PinMode("11","in")
+except:
+	print("Rail_In_2 not found")	
+	exit()
 
 
 #setting up dictonary for Signalname -> pin Conversion
@@ -75,11 +75,11 @@ def set_value(pin, value):
 	print(pin)
 	if pin != "OX3_M_DRILL_ON":
 		pin_set = pin_list[pin]			
-		#rail_out.digitalWrite(pin_set, value)
-		print(pin_set, value)
+		rail_out.digitalWrite(pin_set, value)
+		#print(pin_set, value)
 	elif pin == "OX3_M_DRILL_ON":
-		#drill.digitalWrite(14,value)
-		print(pin,value)
+		drill.digitalWrite(14,value)
+		#print(pin,value)
 	else:
 		print("No Valid Pin found")
 		
