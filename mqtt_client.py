@@ -4,7 +4,8 @@ import gnublin
 import json
 import mosquitto
 import threading
-
+import sys
+import signal
 #setting up modules
 #setting up output modules
 try:
@@ -34,7 +35,7 @@ else:
 	print("Output Module Initialized")
 
 #setting up input modules
-module 1
+#module 1
 try:
 	rail_in_1 = gnublin.gnublin_module_pca9555()
 	rain_in_1.setAdress(0x20)
@@ -93,40 +94,54 @@ def set_value(pin, value):
 
 	#print(pin, value)
 	
+#smooth exit function
+def exit_handler(signal, frame):
+	print("stopping work")
+	rail_out.digitalWrite(8,0)
+	rail_out.digitalWrite(9,0)
+	rail_out.digitalWrite(10,0)
+	rail_out.digitalWrite(11,0)
+	rail_out.digitalWrite(12,0)
+	rail_out.digitalWrite(13,0)
+	rail_out.digitalWrite(14,0)
+	rail_out.digitalWrite(15,0)
+	drill.digitalWrite(14,0)
+	print("Work Stopped \n Sutting Down")
+	sys.exit(0)
 
 
 #function for getting sensor values
-def get_value:
+def get_value():
 	while(1):
-		if rail_in_1.digitalRead(8) == 1 and 8_was1 == 0:
-			8_was1 = 1
+		if rail_in_1.digitalRead(8) == 1 and eight_was1 == 0:
+			eight_was1 = 1
 			mqttc.publish(data["topic"], "IX3_MS_CONV_1 1", data["qos"])
-		if rail_in_1.digitalRead(8) == 0 and 8_was1 == 1 :
-			8_was1 = 0
+		if rail_in_1.digitalRead(8) == 0 and eight_was1 == 1 :
+			eight_was1 = 0
 			mqttc.publish(data["topic"], "IX3_MS_CONV_1 0", data["qos"])
-		if rail_in_1.digitalRead(9) == 1 and 9_was1 == 0 :
-			9_was1 = 1
+		if rail_in_1.digitalRead(9) == 1 and nine_was1 == 0 :
+			nine_was1 = 1
 			mqttc.publish(data["topic"], "IX3_MS_CONV_2 1", data["qos"])
-		if rail_in_1.digitalRead(9) == 0 and 9_was1 == 1 :
-			9_was1 = 0
+		if rail_in_1.digitalRead(9) == 0 and nine_was1 == 1 :
+			nine_was1 = 0
 			mqttc.publish(data["topic"], "IX3_MS_CONV_2 0", data["qos"])
-		if rail_in_1.digitalRead(10) == 1 and 10_was1 == 0 :
-			10_was1 = 1
+		if rail_in_1.digitalRead(10) == 1 and ten_was1 == 0 :
+			ten_was1 = 1
 			mqttc.publish(data["topic"], "IX3_MS_CONV_3 1", data["qos"])
-		if rail_in_1.digitalRead(10) == 0 and 10_was1 == 1 :
-			10_was1 = 0
+		if rail_in_1.digitalRead(10) == 0 and ten_was1 == 1 :
+			ten_was1 = 0
 			mqttc.publish(data["topic"], "IX3_MS_CONV_3 0", data["qos"])
-		if rail_in_1.digitalRead(11) == 1 and 11_was1 == 0 :
-			11_was1 = 1
+		if rail_in_1.digitalRead(11) == 1 and eleven_was1 == 0 :
+			eleven_was1 = 1
 			mqttc.publish(data["topic"], "IX3_SW_TOOL_UP 1", data["qos"])
-		if rail_in_1.digitalRead(11) == 0 and 11_was1 == 1 :
-			11_was1 = 0
+		if rail_in_1.digitalRead(11) == 0 and eleven_was1 == 1 :
+			eleven_was1 = 0
 			mqttc.publish(data["topic"], "IX3_SW_TOOL_UP 0", data["qos"])
-		if rail_in_2.digitalRead(8) == 1 and 12_was1 == 0:
-			12_was1 = 1
+		if rail_in_2.digitalRead(8) == 1 and twelfe_was1 == 0:
+			twelfe_was1 = 1
 			mqttc.publish(data["topic"], "IX3_SW_TOOL_DOWN 1", data["qos"])
-		if rail_in_2.digitalRead(8) == 0 and 12_was1 == 1 :
-			12_was1 = 0
+		if rail_in_2.digitalRead(8) == 0 and twelfe_was1 == 1 :
+			twelfe_was1 = 0
 			mqttc.publish(data["topic"], "IX3_SW_TOOL_DOWN 0", data["qos"])
 			
 				
@@ -187,7 +202,7 @@ else:
 	qos = data["qos"]
 	json_data.close()
 #finished reading config
-
+signal.signal(signal.SIGINT, exit_handler)
 #setting up client and connecting to host
 mqttc = mosquitto.Mosquitto(name)
 #mqttc = mosquitto.Mosquitto()
