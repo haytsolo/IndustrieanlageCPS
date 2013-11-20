@@ -10,24 +10,24 @@ import signal
 #setting up output modules
 try:
 	drill = gnublin.gnublin_gpio()
-	drill.PinMode(14,"out")
+	drill.pinMode(18,"out")
 except:
-	print("Relay not found")
+	print("Drill not found")
 	exit()
 else:
 	print("Drill Initialized")
 
 try:
 	rail_out = gnublin.gnublin_module_pca9555()
-	rail_out.setAdress(0x22)
-	rail_out.PinMode("8","out")
-	rail_out.PinMode("9","out")
-	rail_out.PinMode("10","out")
-	rail_out.PinMode("11","out")
-	rail_out.PinMode("12","out")
-	rail_out.PinMode("13","out")
-	rail_out.PinMode("14","out")
-	rail_out.PinMode("15","out")
+	rail_out.setAddress(0x22)
+	rail_out.pinMode(8,"out")
+	rail_out.pinMode(9,"out")
+	rail_out.pinMode(10,"out")
+	rail_out.pinMode(11,"out")
+	rail_out.pinMode(12,"out")
+	rail_out.pinMode(13,"out")
+	rail_out.pinMode(14,"out")
+	rail_out.pinMode(15,"out")
 except:
 	print("No output Module found")
 	exit()
@@ -38,11 +38,11 @@ else:
 #module 1
 try:
 	rail_in_1 = gnublin.gnublin_module_pca9555()
-	rain_in_1.setAdress(0x20)
-	rail_in_1.PinMode("8","in")
-	rail_in_1.PinMode("9","in")
-	rail_in_1.PinMode("10","in")
-	rail_in_1.PinMode("11","in")
+	rail_in_1.setAddress(0x20)
+	rail_in_1.pinMode(8,"in")
+	rail_in_1.pinMode(9,"in")
+	rail_in_1.pinMode(10,"in")
+	rail_in_1.pinMode(11,"in")
 except:
 	print("Rail_In_1 not found")
 	exit()
@@ -52,11 +52,11 @@ else:
 #module 2
 try:
 	rail_in_2 = gnublin.gnublin_module_pca9555()
-	rain_in_2.setAdress(0x21)
-	rail_in_2.PinMode("8","in")
-	rail_in_2.PinMode("9","in")
-	rail_in_2.PinMode("10","in")
-	rail_in_2.PinMode("11","in")
+	rail_in_2.setAddress(0x21)
+	rail_in_2.pinMode(8,"in")
+	rail_in_2.pinMode(9,"in")
+	rail_in_2.pinMode(10,"in")
+	rail_in_2.pinMode(11,"in")
 except:
 	print("Rail_In_2 not found")	
 	exit()
@@ -66,27 +66,35 @@ else:
 #setting up dictonary for Signalname -> pin Conversion
 
 pin_list = {
-	"OX3_M_CONV1_NEG" : 8, 
-	"OX3_M_CONV2_NEG" : 9,
-	"OX3_M_CONV3_NEG" : 10, 
-	"OX3_M_CONV1_POS" : 11, 
-	"OX3_M_CONV2_POS" : 12, 
-	"OX3_M_CONV3_POS" : 13,
+	"OX3_M_CONV_1_NEG" : 9, 
+	"OX3_M_CONV_2_NEG" : 11,
+	"OX3_M_CONV_3_NEG" : 13, 
+	"OX3_M_CONV_1_POS" : 8, 
+	"OX3_M_CONV_2_POS" : 10, 
+	"OX3_M_CONV_3_POS" : 12,
 	"OX3_M_TOOL_UP" : 14,
-	"OX3_M_TOOL_DOWN" : 15  }
+	"OX3_M_TOOL_DOWN" : 15,  
+	"'OX3_M_CONV_1_NEG'" : 9, 
+	"'OX3_M_CONV_2_NEG'" : 11,
+	"'OX3_M_CONV_3_NEG'" : 13, 
+	"'OX3_M_CONV_1_POS'" : 8, 
+	"'OX3_M_CONV_2_POS'" : 10, 
+	"'OX3_M_CONV_3_POS'" : 12,
+	"'OX3_M_TOOL_UP'" : 14,
+	"'OX3_M_TOOL_DOWN'" : 15}
 
 
 
 
 # function for setting output values
 def set_value(pin, value):
-	print(pin)
+	#print(pin)
 	if pin != "OX3_M_DRILL_ON":
 		pin_set = pin_list[pin]			
 		rail_out.digitalWrite(pin_set, value)
 		#print(pin_set, value)
 	elif pin == "OX3_M_DRILL_ON":
-		drill.digitalWrite(14,value)
+		drill.digitalWrite(18,value)
 		#print(pin,value)
 	else:
 		print("No Valid Pin found")
@@ -105,13 +113,19 @@ def exit_handler(signal, frame):
 	rail_out.digitalWrite(13,0)
 	rail_out.digitalWrite(14,0)
 	rail_out.digitalWrite(15,0)
-	drill.digitalWrite(14,0)
+	drill.digitalWrite(18,0)
 	print("Work Stopped \n Sutting Down")
+	t1._Thread__stop()
 	sys.exit(0)
 
 
 #function for getting sensor values
 def get_value():
+	eight_was1 =0
+	nine_was1 =0
+	ten_was1 =0
+	eleven_was1 =0
+	twelfe_was1 =0
 	while(1):
 		if rail_in_1.digitalRead(8) == 1 and eight_was1 == 0:
 			eight_was1 = 1
@@ -177,11 +191,7 @@ def on_log(mosq, obj, level, string):
 	print(string)
 
 #starting input thread
-try:
-	t1 = threading.Thread(target=get_value, args=[])
-	t1.start()
-except:
-	print("thread could not be started")
+
 #read config and set values
 try:
 	json_data = open("config.js","r")
@@ -212,9 +222,23 @@ mqttc.on_publish = on_publish
 mqttc.on_subscribe = on_subscribe
 # Uncomment to enable debug messages
 #mqttc.on_log = on_log
+rail_out.digitalWrite(8,0)
+rail_out.digitalWrite(9,0)
+rail_out.digitalWrite(10,0)
+rail_out.digitalWrite(11,0)
+rail_out.digitalWrite(12,0)
+rail_out.digitalWrite(13,0)
+rail_out.digitalWrite(14,0)
+rail_out.digitalWrite(15,0)
+drill.digitalWrite(18,0)
 try:	
 	mqttc.connect(host, port, 60)
 except:
 	print("no broker found")
 	exit()
+try:
+	t1 = threading.Thread(target=get_value, args=[])
+	t1.start()
+except:
+	print("thread could not be started")
 mqttc.loop_forever()
