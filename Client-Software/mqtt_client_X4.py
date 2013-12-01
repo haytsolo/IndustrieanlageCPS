@@ -194,7 +194,7 @@ def on_log(mosq, obj, level, string):
 
 #read config and set values
 try:
-	json_data = open("config.js","r")
+	json_data = open("config_X4.js","r")
 except:
 	print("no config file found \nLoading standart config: \n")
 	print(" host = localhost \n port = 1883 \n name = gnublin \n topic = /sys \n qos = 1\n")
