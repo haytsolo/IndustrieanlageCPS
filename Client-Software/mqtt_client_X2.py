@@ -90,8 +90,11 @@ pin_list = {
 def set_value(pin, value):
 	#print(pin)
 	if pin != "OX2_M_DRILL_ON":
-		pin_set = pin_list[pin]			
-		rail_out.digitalWrite(pin_set, value)
+		if pin in pin_list:
+			pin_set = pin_list[pin]			
+			rail_out.digitalWrite(pin_set, value)
+		else:
+			print("No valid Pin found")		
 		#print(pin_set, value)
 	elif pin == "OX2_M_DRILL_ON":
 		drill.digitalWrite(18,value)

@@ -115,39 +115,76 @@ def get_value():
 	ten_was1 =0
 	eleven_was1 =0
 	twelfe_was1 =0
+	thirteen_was1 =0
+	fourteen_was1 =0
+	fifteen_was1 =0
 	while(1):
+#in 1
 		if rail_in_1.digitalRead(8) == 1 and eight_was1 == 0:
 			eight_was1 = 1
-			mqttc.publish(data["topic"], "IX2_MS_CONV_1 1", data["qos"])
+			mqttc.publish(data["topic"], "IX1_LS_STOCK 1", data["qos"])
 		if rail_in_1.digitalRead(8) == 0 and eight_was1 == 1 :
 			eight_was1 = 0
-			mqttc.publish(data["topic"], "IX2_MS_CONV_1 0", data["qos"])
+			mqttc.publish(data["topic"], "IX1_LS_STOCK 0", data["qos"])
+		
+
 		if rail_in_1.digitalRead(9) == 1 and nine_was1 == 0 :
 			nine_was1 = 1
-			mqttc.publish(data["topic"], "IX2_MS_CONV_2 1", data["qos"])
+			mqttc.publish(data["topic"], "IX1_RC_CHAIN 1", data["qos"])
 		if rail_in_1.digitalRead(9) == 0 and nine_was1 == 1 :
 			nine_was1 = 0
-			mqttc.publish(data["topic"], "IX2_MS_CONV_2 0", data["qos"])
+			mqttc.publish(data["topic"], "IX1_RC_CHAIN 0", data["qos"])
+
+
 		if rail_in_1.digitalRead(10) == 1 and ten_was1 == 0 :
 			ten_was1 = 1
-			mqttc.publish(data["topic"], "IX2_MS_CONV_3 1", data["qos"])
+			mqttc.publish(data["topic"], "IX1_RC_DIFFER_1 1", data["qos"])
 		if rail_in_1.digitalRead(10) == 0 and ten_was1 == 1 :
 			ten_was1 = 0
-			mqttc.publish(data["topic"], "IX2_MS_CONV_3 0", data["qos"])
+			mqttc.publish(data["topic"], "IX1_RC_DIFFER_1 0", data["qos"])
+
+
 		if rail_in_1.digitalRead(11) == 1 and eleven_was1 == 0 :
 			eleven_was1 = 1
-			mqttc.publish(data["topic"], "IX2_SW_TOOL_UP 1", data["qos"])
+			mqttc.publish(data["topic"], "IX1_RC_DIFFER_2 1", data["qos"])
 		if rail_in_1.digitalRead(11) == 0 and eleven_was1 == 1 :
 			eleven_was1 = 0
-			mqttc.publish(data["topic"], "IX2_SW_TOOL_UP 0", data["qos"])
+			mqttc.publish(data["topic"], "IX1_RC_DIFFER_2 0", data["qos"])
+#in 2
+
 		if rail_in_2.digitalRead(8) == 1 and twelfe_was1 == 0:
 			twelfe_was1 = 1
-			mqttc.publish(data["topic"], "IX2_SW_TOOL_DOWN 1", data["qos"])
+			mqttc.publish(data["topic"], "IX1_SW_RAIL_1 1", data["qos"])
 		if rail_in_2.digitalRead(8) == 0 and twelfe_was1 == 1 :
 			twelfe_was1 = 0
-			mqttc.publish(data["topic"], "IX2_SW_TOOL_DOWN 0", data["qos"])
-			
+			mqttc.publish(data["topic"], "IX1_SW_RAIL_1 0", data["qos"])
+
+
+		if rail_in_2.digitalRead(9) == 1 and thirteen_was1 == 0:
+			thirteen_was1 = 1
+			mqttc.publish(data["topic"], "IX1_SW_RAIL_2 1", data["qos"])
+		if rail_in_2.digitalRead(9) == 0 and thirteen_was1 == 1 :
+			thirteen_was1 = 0
+			mqttc.publish(data["topic"], "IX1_SW_RAIL_2 0", data["qos"])
+
+
+		if rail_in_2.digitalRead(10) == 1 and fourteen_was1 == 0:
+			fourteen_was1 = 1
+			mqttc.publish(data["topic"], "IX1_SW_RAIL_3 1", data["qos"])
+		if rail_in_2.digitalRead(10) == 0 and fourteen_was1 == 1 :
+			fourteen_was1 = 0
+			mqttc.publish(data["topic"], "IX1_SW_RAIL_3 0", data["qos"])
+
+
+
+		if rail_in_2.digitalRead(11) == 1 and fifteen_was1 == 0:
+			fifteen_was1 = 1
+			mqttc.publish(data["topic"], "IX1_MS_WAGON 1", data["qos"])
+		if rail_in_2.digitalRead(11) == 0 and fifteen_was1 == 1 :
+			fifteen_was1 = 0
+			mqttc.publish(data["topic"], "IX1_MS_WAGON 0", data["qos"])			
 				
+
 
 def on_connect(mosq, obj, rc):
 	mosq.subscribe(topic, qos)
@@ -183,7 +220,7 @@ def on_log(mosq, obj, level, string):
 
 #read config and set values
 try:
-	json_data = open("config_X2.js","r")
+	json_data = open("config_X1.js","r")
 except:
 	print("no config file found \nLoading standart config: \n")
 	print(" host = localhost \n port = 1883 \n name = gnublin \n topic = /sys \n qos = 1\n")
