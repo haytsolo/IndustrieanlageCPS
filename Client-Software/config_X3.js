@@ -3,8 +3,8 @@
     "host": "192.168.1.100",
     "port": 1883,
     "name": "gnublin_3",
-    "topic": "x3",
-    "qos" : 1
+    "topic": "MQTT_TOPIC_GNUBLIN_X3",
+    "qos" : 2
     
     
 }
