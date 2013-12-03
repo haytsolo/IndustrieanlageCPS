@@ -100,7 +100,7 @@ pin_list = {
 	"OX5_M_CONV_1_NEG" : 8, 
 	"OX5_M_CONV_1_POS" : 9,
 	"OX5_M_CONV_2_NEG" : 10, 
-	"OX5_M_CONV_2_ POS" : 11, 
+	"OX5_M_CONV_2_POS" : 11, 
 	"OX5_M_TURNT_1_VER" : 12,
 	"OX5_M_TURNT_1_HOR" : 13,
 	"OX5_M_CONV_TURNT_1_NEG" : 14,
@@ -109,7 +109,7 @@ pin_list = {
 	"'OX5_M_CONV_1_POS'" : 9,
 	"'OX5_M_CONV_2_NEG'" : 10, 
 	"'OX5_M_CONV_2_ POS'" : 11, 
-	"'OX5_M_TURNT_1_VER'" : 12
+	"'OX5_M_TURNT_1_VER'" : 12,
 	"'OX5_M_TURNT_1_HOR'" : 13,
 	"'OX5_M_CONV_TURNT_1_NEG'" : 14,
 	"'OX5_M_CONV_TURNT_1_POS'" : 15}
@@ -127,7 +127,7 @@ pin_list1 = {
 	"'OX5_M_TURNT_2_HOR'" : 9,
 	"'OX5_M_CONV_TURNT_2_NEG'" : 10, 
 	"'OX5_M_CONV_TURNT_2_POS'" : 11, 
-	"'OX5_M_TURNT_3_VER'" : 12
+	"'OX5_M_TURNT_3_VER'" : 12,
 	"'OX5_M_TURNT_3_HOR'" : 13,
 	"'OX5_M_CONV_TURNT_3_NEG'" : 14,
 	"'OX5_M_CONV_TURNT_3_POS'" : 15,}
@@ -186,7 +186,7 @@ def get_value():
 	seventeen_was1 =0
 	eighteen_was1 =0
 	nineteen_was1 =0
-while(1):
+	while(1):
 
 #in 1
 		if rail_in_1.digitalRead(8) == 1 and eight_was1 == 0:
@@ -271,7 +271,7 @@ while(1):
 			mqttc.publish(data["topic"], "IX5_SW_TURNT_3_VER 0", data["qos"])
 
 
-		if rail_in_3digitalRead(10) == 1 and eighteen_was1 == 0:
+		if rail_in_3.digitalRead(10) == 1 and eighteen_was1 == 0:
 			eighteen_was1 = 1
 			mqttc.publish(data["topic"], "IX5_MS_TURNT_3 1", data["qos"])
 		if rail_in_3.digitalRead(10) == 0 and eighteen_was1 == 1 :
@@ -353,14 +353,23 @@ mqttc.on_publish = on_publish
 mqttc.on_subscribe = on_subscribe
 # Uncomment to enable debug messages
 #mqttc.on_log = on_log
-rail_out.digitalWrite(8,0)
-rail_out.digitalWrite(9,0)
-rail_out.digitalWrite(10,0)
-rail_out.digitalWrite(11,0)
-rail_out.digitalWrite(12,0)
-rail_out.digitalWrite(13,0)
-rail_out.digitalWrite(14,0)
-rail_out.digitalWrite(15,0)
+rail_out_1.digitalWrite(8,0)
+rail_out_1.digitalWrite(9,0)
+rail_out_1.digitalWrite(10,0)
+rail_out_1.digitalWrite(11,0)
+rail_out_1.digitalWrite(12,0)
+rail_out_1.digitalWrite(13,0)
+rail_out_1.digitalWrite(14,0)
+rail_out_1.digitalWrite(15,0)
+rail_out_2.digitalWrite(8,0)
+rail_out_2.digitalWrite(9,0)
+rail_out_2.digitalWrite(10,0)
+rail_out_2.digitalWrite(11,0)
+rail_out_2.digitalWrite(12,0)
+rail_out_2.digitalWrite(13,0)
+rail_out_2.digitalWrite(14,0)
+rail_out_2.digitalWrite(15,0)
+
 drill.digitalWrite(18,0)
 try:	
 	mqttc.connect(host, port, 60)

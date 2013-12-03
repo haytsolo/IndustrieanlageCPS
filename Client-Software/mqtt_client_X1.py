@@ -66,16 +66,16 @@ else:
 #setting up dictonary for Signalname -> pin Conversion
 
 pin_list = {
-	"OX1_M_STOCK_CHAIN" : 8, 
+	"OX1_M_SOCK_CHAIN" : 8, 
 	"OX1_M_WAGON_DRIVE_X_NEG" : 9,
 	"OX1_M_WAGON_DRIVE_X_POS" : 10, 
-	"OX1_M_WAGON_DRIVE_Y_NEG" : 11, 
-	"OX1_M_WAGON_DRIVE_Y_POS" : 12, 
-	"'OX1_M_STOCK_CHAIN'" : 8, 
+	"OX1_M_WAGON_CONV_Y_NEG" : 11, 
+	"OX1_M_WAGON_CONV_Y_POS" : 12, 
+	"'OX1_M_SOCK_CHAIN'" : 8, 
 	"'OX1_M_WAGON_DRIVE_X_NEG'" : 9,
 	"'OX1_M_WAGON_DRIVE_X_POS'" : 10, 
-	"'OX1_M_WAGON_DRIVE_Y_NEG'" : 11, 
-	"'OX1_M_WAGON_DRIVE_Y_POS'" : 12}
+	"'OX1_M_WAGON_CONV_Y_NEG'" : 11, 
+	"'OX1_M_WAGON_CONV_Y_POS'" : 12}
 
 
 
