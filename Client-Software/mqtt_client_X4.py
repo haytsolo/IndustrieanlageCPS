@@ -132,34 +132,34 @@ def get_value():
 	while(1):
 		if rail_in_1.digitalRead(8) == 1 and eight_was1 == 0:
 			eight_was1 = 1
-			mqttc.publish(data["topic"], "IX4_MS_CONV_1 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX4_MS_CONV_1 1", data["qos"])
 		if rail_in_1.digitalRead(8) == 0 and eight_was1 == 1 :
 			eight_was1 = 0
-			mqttc.publish(data["topic"], "IX4_MS_CONV_1 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX4_MS_CONV_1 0", data["qos"])
 		if rail_in_1.digitalRead(9) == 1 and nine_was1 == 0 :
 			nine_was1 = 1
-			mqttc.publish(data["topic"], "IX4_MS_CONV_2 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX4_MS_CONV_2 1", data["qos"])
 		if rail_in_1.digitalRead(9) == 0 and nine_was1 == 1 :
 			nine_was1 = 0
-			mqttc.publish(data["topic"], "IX4_MS_CONV_2 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX4_MS_CONV_2 0", data["qos"])
 		if rail_in_1.digitalRead(10) == 1 and ten_was1 == 0 :
 			ten_was1 = 1
-			mqttc.publish(data["topic"], "IX4_MS_CONV_3 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX4_MS_CONV_3 1", data["qos"])
 		if rail_in_1.digitalRead(10) == 0 and ten_was1 == 1 :
 			ten_was1 = 0
-			mqttc.publish(data["topic"], "IX4_MS_CONV_3 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX4_MS_CONV_3 0", data["qos"])
 		if rail_in_1.digitalRead(11) == 1 and eleven_was1 == 0 :
 			eleven_was1 = 1
-			mqttc.publish(data["topic"], "IX4_SW_TOOL_UP 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX4_SW_TOOL_UP 1", data["qos"])
 		if rail_in_1.digitalRead(11) == 0 and eleven_was1 == 1 :
 			eleven_was1 = 0
-			mqttc.publish(data["topic"], "IX4_SW_TOOL_UP 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX4_SW_TOOL_UP 0", data["qos"])
 		if rail_in_2.digitalRead(8) == 1 and twelfe_was1 == 0:
 			twelfe_was1 = 1
-			mqttc.publish(data["topic"], "IX4_SW_TOOL_DOWN 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX4_SW_TOOL_DOWN 1", data["qos"])
 		if rail_in_2.digitalRead(8) == 0 and twelfe_was1 == 1 :
 			twelfe_was1 = 0
-			mqttc.publish(data["topic"], "IX4_SW_TOOL_DOWN 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX4_SW_TOOL_DOWN 0", data["qos"])
 			
 				
 
@@ -212,6 +212,7 @@ else:
 	port = data["port"]
 	name = data["name"]
 	topic = data["topic"]
+	send_topic = data["send_topic"]
 	qos = data["qos"]
 	json_data.close()
 #finished reading config

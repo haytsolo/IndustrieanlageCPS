@@ -191,99 +191,99 @@ def get_value():
 #in 1
 		if rail_in_1.digitalRead(8) == 1 and eight_was1 == 0:
 			eight_was1 = 1
-			mqttc.publish(data["topic"], "IX5_MS_CONV_1 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_MS_CONV_1 1", data["qos"])
 		if rail_in_1.digitalRead(8) == 0 and eight_was1 == 1 :
 			eight_was1 = 0
-			mqttc.publish(data["topic"], "IX5_MS_CONV_1 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_MS_CONV_1 0", data["qos"])
 	
 
 		if rail_in_1.digitalRead(9) == 1 and nine_was1 == 0 :
 			nine_was1 = 1
-			mqttc.publish(data["topic"], "IX5_MS_CONV_2 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_MS_CONV_2 1", data["qos"])
 		if rail_in_1.digitalRead(9) == 0 and nine_was1 == 1 :
 			nine_was1 = 0
-			mqttc.publish(data["topic"], "IX5_MS_CONV_2 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_MS_CONV_2 0", data["qos"])
 
 
 		if rail_in_1.digitalRead(10) == 1 and ten_was1 == 0 :
 			ten_was1 = 1
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_1_HOR 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_1_HOR 1", data["qos"])
 		if rail_in_1.digitalRead(10) == 0 and ten_was1 == 1 :
 			ten_was1 = 0
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_1_HOR 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_1_HOR 0", data["qos"])
 
 
 		if rail_in_1.digitalRead(11) == 1 and eleven_was1 == 0 :
 			eleven_was1 = 1
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_1_VER 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_1_VER 1", data["qos"])
 		if rail_in_1.digitalRead(11) == 0 and eleven_was1 == 1 :
 			eleven_was1 = 0
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_1_VER 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_1_VER 0", data["qos"])
 #in 2
 
 		if rail_in_2.digitalRead(8) == 1 and twelfe_was1 == 0:
 			twelfe_was1 = 1
-			mqttc.publish(data["topic"], "IX5_MS_TURNT_1 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_MS_TURNT_1 1", data["qos"])
 		if rail_in_2.digitalRead(8) == 0 and twelfe_was1 == 1 :
 			twelfe_was1 = 0
-			mqttc.publish(data["topic"], "IX5_MS_TURNT_1 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_MS_TURNT_1 0", data["qos"])
 			
 
 
 		if rail_in_2.digitalRead(9) == 1 and thirteen_was1 == 0:
 			thirteen_was1 = 1
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_2_HOR 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_2_HOR 1", data["qos"])
 		if rail_in_2.digitalRead(9) == 0 and thirteen_was1 == 1 :
 			thirteen_was1 = 0
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_2_HOR 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_2_HOR 0", data["qos"])
 
 
 		if rail_in_2.digitalRead(10) == 1 and fourteen_was1 == 0:
 			fourteen_was1 = 1
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_2_VER 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_2_VER 1", data["qos"])
 		if rail_in_2.digitalRead(10) == 0 and fourteen_was1 == 1 :
 			fourteen_was1 = 0
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_2_VER 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_2_VER 0", data["qos"])
 
 
 		if rail_in_2.digitalRead(11) == 1 and fifteen_was1 == 0:
 			fifteen_was1 = 1
-			mqttc.publish(data["topic"], "IX5_MS_TURNT_2 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_MS_TURNT_2 1", data["qos"])
 		if rail_in_2.digitalRead(11) == 0 and fifteen_was1 == 1 :
 			fifteen_was1 = 0
-			mqttc.publish(data["topic"], "IX5_MS_TURNT_2 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_MS_TURNT_2 0", data["qos"])
 
 #in 3
 		
 		if rail_in_3.digitalRead(8) == 1 and sixteen_was1 == 0:
 			sixteen_was1 = 1
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_3_HOR 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_3_HOR 1", data["qos"])
 		if rail_in_3.digitalRead(8) == 0 and sixteen_was1 == 1 :
 			sixteen_was1 = 0
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_3_HOR 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_3_HOR 0", data["qos"])
 
 
 		if rail_in_3.digitalRead(9) == 1 and seventeen_was1 == 0:
 			seventeen_was1 = 1
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_3_VER 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_3_VER 1", data["qos"])
 		if rail_in_3.digitalRead(9) == 0 and seventeen_was1 == 1 :
 			seventeen_was1 = 0
-			mqttc.publish(data["topic"], "IX5_SW_TURNT_3_VER 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_SW_TURNT_3_VER 0", data["qos"])
 
 
 		if rail_in_3.digitalRead(10) == 1 and eighteen_was1 == 0:
 			eighteen_was1 = 1
-			mqttc.publish(data["topic"], "IX5_MS_TURNT_3 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_MS_TURNT_3 1", data["qos"])
 		if rail_in_3.digitalRead(10) == 0 and eighteen_was1 == 1 :
 			eighteen_was1 = 0
-			mqttc.publish(data["topic"], "IX5_MS_TURNT_3 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_MS_TURNT_3 0", data["qos"])
 
 		if rail_in_3.digitalRead(11) == 1 and nineteen_was1 == 0:
 			nineteen_was1 = 1
-			mqttc.publish(data["topic"], "IX5_IS_EJECT 1", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_IS_EJECT 1", data["qos"])
 		if rail_in_3.digitalRead(11) == 0 and nineteen_was1 == 1 :
 			nineteen_was1 = 0
-			mqttc.publish(data["topic"], "IX5_IS_EJECT 0", data["qos"])
+			mqttc.publish(data["send_topic"], "IX5_IS_EJECT 0", data["qos"])
 
 
 
@@ -340,6 +340,7 @@ else:
 	port = data["port"]
 	name = data["name"]
 	topic = data["topic"]
+	send_topic = data["send_topic"]
 	qos = data["qos"]
 	json_data.close()
 #finished reading config
